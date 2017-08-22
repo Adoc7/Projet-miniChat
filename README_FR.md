@@ -34,7 +34,11 @@ C'est un t'chat, vous devez bien sûr laisser les gens discuter ensemble sur un 
 
 ### Niveau 2
 
-* Le mini-chat ne s'actualise pas automatiquement s'il y a de nouveaux messages. En revanche, ce que vous pouvez facilement faire, c'est proposer un lien « Rafraîchir » qui charge à nouveau la page. Ainsi, s'il y a de nouveaux messages, ils apparaîtront après un clic sur le lien.
+* Le mini-chat ne s'actualise pas automatiquement
+ s'il y a de nouveaux messages. En revanche, ce que vous pouvez facilement faire, 
+ c'est proposer un lien « Rafraîchir » qui charge à nouveau la page.
+  Ainsi, s'il y a de nouveaux messages, 
+ ils apparaîtront après un clic sur le lien.
 
 * Rafraichir automatiquement la page toute les 30 secondes à l'aide de __JavaScript__.
 
