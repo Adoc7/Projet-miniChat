@@ -16,16 +16,63 @@ left:20%;
 
 }
 .pseudMess{
-    font-size:2vw;
+    font-size:1.5vw;
     color:dodgerblue;
 }
 
 .mdl-grid{
     position:relative;
     z-index:200;
-    padding:5%;
+    padding:1%;
 width:100%;
     left:0;
-    background-color: rgba(220,220,255,0.9);
+    background-color: rgba(240,240,255,0.9);
 
+}
+
+a:link {
+    background-color: rgba(255,50,50,0.6);
+}
+
+a:visited {
+    background-color: rgba(200,50,50,0.6);
+}
+
+a:link, a:visited {
+    font-size:2vw;
+    color: white;
+    margin-bottom:0.8%;
+    width:4%;
+    height:4%;
+    padding: 1.5% 1%;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    display: inline-block;
+}
+
+
+a:hover, a:active {
+    background-color: rgba(255,100,100,1);
+}
+#act:link {
+    background-color: rgba(255,50,50,0.6);
+}
+
+#act:visited {
+    background-color: rgba(200,50,50,0.6);
+}
+
+#act{
+    background-color: rgba(255,50,50,0.6);
+    font-size:2vw;
+    color: white;
+    margin-bottom:0.8%;
+    width:20%;
+    height:4%;
+    padding: 1.5% 1%;
+    text-align: center;
+    vertical-align: middle;
+    text-decoration: none;
+    display: inline-block;
 }

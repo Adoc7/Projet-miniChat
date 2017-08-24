@@ -1,20 +1,14 @@
-
 <?php
 /// je declare la superglobale tjrs avant HTML
 $cookiePseudo=$_COOKIE['sample3'];
 ?>
 
-
-
 <?php
-// Connexion à la base de données
-/* TODO */
-if ($_POST) {
-    // Insertion du message à l'aide d'une requête préparée
-    /* TODO */
-}
+
+include("compteur_message.php");
 
 ?>
+
 <!DOCTYPE>
 <html>
 
@@ -29,68 +23,91 @@ if ($_POST) {
 </head>
 
 <body>
-<form action="script.php" class="mdl-grid" method="POST">
-    <div class="mdl-cell mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" name="pseudo" value="<?php echo $cookiePseudo ?>" id="pseudo">
-        <label class="mdl-textfield__label" for="sample3">Pseudo</label>
-    </div>
-    <div class="mdl-cell mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
-        <input class="mdl-textfield__input" type="text" name="message" value=""  id="message">
-        <label class="mdl-textfield__label" for="sample3">Message</label>
-    </div>
-    <button id="send" class="mdl-cell mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
-        <i class="material-icons">send</i>
-    </button>
-</form>
+
+<div>
+    <form action="script.php" class="mdl-grid" method="POST">
+        <div class="mdl-cell mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" name="pseudo" value="<?php echo $cookiePseudo ?>" id="pseudo">
+            <label class="mdl-textfield__label" for="sample3">Pseudo</label>
+        </div>
+        <div class="mdl-cell mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+            <input class="mdl-textfield__input" type="text" name="message" value=""  id="message">
+            <label class="mdl-textfield__label" for="sample3">Message</label>
+        </div>
+        <button id="send" class="mdl-cell mdl-button mdl-js-button mdl-button--fab mdl-button--mini-fab mdl-button--colored">
+            <i class="material-icons">send</i>
+        </button>
+
+
+
+</div>
+
 <div class="mdl-layout mdl-js-layout">
     <main class="mdl-layout__content">
         <div class="page-content">
             <div>
-
-                    <!-- Afficher la liste des messages -->
+<!--//////////////////////////////////////////////////////-->
+                <!-- Afficher la liste des messages -->
+<!--                ///////////////////////////////////////-->
                 <?php
-                include("affichage.php");
+//                include("connect.php");
+//                include("compteur_message.php");
+
+                $nbr_msg_affich=12;
+                $nombre_de_pages=ceil($nombre_de_messages/$nbr_msg_affich);
+
+                for($i=1; $i<=$nombre_de_pages; $i++)
+                {
+                    ?>
+                    <a href="index.php?page=<?php echo $i ?> "><?php echo $i ?></a>
+                    <?php
+                }
+//                ?>
+<!--                --><?php
+                $page_actu=$_GET['page'];
+                $deb_msg_affich=ceil($page_actu-1) * $nbr_msg_affich;
+
+                $reponse = $pdo->query("SELECT pseudo, message FROM tchat ORDER BY ID DESC LIMIT $deb_msg_affich, $nbr_msg_affich");
+
+
+                $reponse1 = $reponse->fetchAll();
+
+                foreach ($reponse1 as $value) {
+                    ?>
+                    <div>
+                        <div id="text">
+                            <p>
+                                <?php
+                                $pseudo= $value->pseudo;
+                                $message= $value->message;
+                                ?>
+                                <b><span class="pseudMess">Pseudo : </span></b><?=  $pseudo ?><span> ///  </span>
+                                <b><span class="pseudMess">message : </span></b><?= $message ?><hr>
+                            </p>
+                        </div>
+                    </div>
+                    <?php
+                }
+                ?>
+            </div>
+
+<!--            //////////////////////////////////-->
+
+
+            <div>
+                <?php
+
+                echo  $deb_msg_affich;
                 ?>
 
             </div>
 
-            <ul class="demo-list-item mdl-list" id="conversation">
-                <?php
-                // Récupération des 10 derniers messages
-                /* TODO */
-                // Affichage de chaque message (toutes les données sont protégées par htmlspecialchars)
-                /* TODO */
-                // while (...) {
-                ?>
-                <li class="mdl-list__item">
-                        <span class="mdl-list__item-primary-content">
-                            <strong><?php /* TODO */ ?></strong> <?php /* TODO */ ?>
-                        </span>
-                </li>
-                <?php
-                // }
-                // ...
-                ?>
-            </ul>
         </div>
     </main>
 
+    <a id="act" href="javascript: window.refresh();">actualiser</a>
 
-
-
-  <p>
-<!--    <input type="text" name="pseudo" value=--><?php //echo $val_cookie_pseudo; ?><!-->
-<!--    <input type="text" name="toto" value="--><?php //echo $cookiePseudo ?><!--">-->
-
-    </p>
-
-
-    <a href="javascript: window.refresh();">actualiser</a>
-
-<!--    <input type="button" value="Click !" name="btnActualiser" onclick="document.location.reload(); return false;" />-->
-
-
-
+    <!--    <input type="button" value="Click !" name="btnActualiser" onclick="document.location.reload(); return false;" />-->
 </div>
 
 <script type="text/javascript">
