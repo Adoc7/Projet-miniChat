@@ -64,7 +64,16 @@ include("compteur_message.php");
                 }
 //                ?>
 <!--                --><?php
-                $page_actu=$_GET['page'];
+                if(isset($_GET['page'])&&$_GET['page']>0&&$_GET['page']<$nombre_de_pages){
+//                {
+
+                    $page_actu=$_GET['page'];
+                    }
+
+                    else {
+                    $page_actu = 1;
+                        }
+
                 $deb_msg_affich=ceil($page_actu-1) * $nbr_msg_affich;
 
                 $reponse = $pdo->query("SELECT pseudo, message FROM tchat ORDER BY ID DESC LIMIT $deb_msg_affich, $nbr_msg_affich");

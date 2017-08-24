@@ -20,5 +20,7 @@ setcookie('sample3', $_POST['pseudo'], time() + 365*24*3600, null, null, false, 
 
 print_r($pdo->errorInfo());
 
+
+
 header("location: index.php");
 ?>
